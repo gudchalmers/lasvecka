@@ -30,7 +30,7 @@ jobs:
 
       - name: Push frontend image
         run: |
-          IMAGE_ID=${{ secrets.DOCKERHUB_USER }}/$IMAGE_NAME_ONE
+          IMAGE_ID=gudchs/$IMAGE_NAME_ONE
 
           echo IMAGE_ID=$IMAGE_ID
 
