@@ -1,0 +1,47 @@
+name: Docker
+
+on:
+  push:
+    # Publish `main` as Docker `latest` image.
+    branches:
+      - main
+env:
+  IMAGE_NAME_ONE: lasvecka_frontend
+  IMAGE_NAME_TWO: lasvecka_backend
+
+jobs:
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build frontend image
+        run: docker build . --file ./lasvecka_react/prod.Dockerfile --tag $IMAGE_NAME_ONE
+        
+      - name: Build backend image
+        run: docker build . --file ./lasvecka_python/prod.Dockerfile --tag $IMAGE_NAME_TWO
+
+      - name: Log into registry
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+
+      - name: Push frontend image
+        run: |
+          IMAGE_ID=${{ secrets.DOCKERHUB_USER }}/$IMAGE_NAME_ONE
+
+          echo IMAGE_ID=$IMAGE_ID
+
+          docker tag $IMAGE_NAME_ONE $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
+          
+      - name: Push backend image
+        run: |
+          IMAGE_ID=${{ secrets.DOCKERHUB_USER }}/$IMAGE_NAME_TWO
+          
+          echo IMAGE_ID=$IMAGE_ID
+          
+          docker tag $IMAGE_NAME_ONE $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
