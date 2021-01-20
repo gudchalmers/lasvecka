@@ -20,11 +20,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build frontend image
-        run: docker build . --file ./lasvecka-react/prod.Dockerfile --tag $IMAGE_NAME_ONE
+        run: docker build --tag $IMAGE_NAME_ONE -f ./lasvecka-react/prod.Dockerfile ./lasvecka-react
         
       - name: Build backend image
-        run: docker build . --file ./lasvecka-python/prod.Dockerfile --tag $IMAGE_NAME_TWO
-
+        run: docker build --tag $IMAGE_NAME_TWO -f ./lasvecka-python/prod.Dockerfile ./lasvecka-python
+        
       - name: Log into registry
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
 
