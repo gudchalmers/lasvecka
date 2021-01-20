@@ -8,6 +8,7 @@ USER node
 WORKDIR /usr/src/lasveckor/frontend
 
 COPY . .
+COPY ["package.json", "./"]
 
 RUN yarn install
 RUN yarn global add react-scripts
