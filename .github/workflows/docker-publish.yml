@@ -31,8 +31,8 @@ jobs:
         id: docker_build_backend
         uses: docker/build-push-action@v2
         with:
-          context: ./lasvecka-python
-          file: ./prod.Dockerfile
+          context: ./
+          file: ./lasvecka-python/prod.Dockerfile
           push: true
           tags: gudchs/lasvecka_backend:latest
           
@@ -40,8 +40,8 @@ jobs:
         id: docker_build_frontend
         uses: docker/build-push-action@v2
         with:
-          context: ./lasvecka-react
-          file: ./prod.Dockerfile
+          context: ./
+          file: ./lasvecka-react/prod.Dockerfile
           push: true
           tags: gudchs/lasvecka_frontend:latest
           
