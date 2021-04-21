@@ -33,7 +33,14 @@ def compute_time():
     east_start_check = current_date - date.fromisofformat(EASTER_START)
     if east_start_check.days > 0 and east_end_check.days < 0:
         return ("Självstudier")
-
+    else:
+        dat, typ = read_date_period()
+        if typ == "exam_period":
+            return ("Tentaperiod")
+        else:
+            delta_t = current_date - date.fromisoformat(dat)
+            weeks, days = divmod(delta_t.days, 7)
+            return ("LV " + str(weeks))
 
 if __name__ == '__main__':
     print(compute_time())
