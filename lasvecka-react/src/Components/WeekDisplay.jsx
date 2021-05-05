@@ -27,8 +27,8 @@ class WeekDisplay extends Component {
   }
 
   /*
-    Generates the text to be rendered on the webpage, checks first if it's
-    easter since it needs to be handled differently from normal use cases.
+    Generates the text to be rendered on the webpage, returns "Självstudier"
+    if data hasn't been loaded from the backend.
   */
   genText = () => {
     let data = this.state.data

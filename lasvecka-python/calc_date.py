@@ -5,7 +5,7 @@ EASTER_START = "2021-04-01"
 EASTER_END = "2021-04-10"
 ORD_CONT = "2021-04-12"
 
-# Find the appropiate date
+# Find the appropiate date & period from data.txt (the output from the webscraper)
 def read_date_period():
     current_date = date.today()
     sought_date = ""
@@ -24,6 +24,8 @@ def read_date_period():
         return(sought_date, date_dict[sought_date])
 
 
+# Computes and determines the week of the study period, or returns Självstudier/Tentavecka if it's Easter or
+# exam period.
 def compute_time():
     current_date = date.today()
     east_end_check =  current_date - date.fromisoformat(EASTER_END)

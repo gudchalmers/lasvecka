@@ -14,7 +14,7 @@ app.config.from_object(__name__)
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-# return contents of data.txt as a json object
+# return the string be used in the frontend as a JSON-object
 @app.route('/getData')
 def get_studyweek():
     return jsonify(compute_time())
