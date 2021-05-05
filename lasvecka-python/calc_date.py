@@ -36,7 +36,7 @@ def compute_time():
     else:
         dat, typ = read_date_period()
         if typ == "exam_period":
-            return ("Tentaperiod")
+            return ("Tentavecka")
         else:
             delta_t = current_date - date.fromisoformat(dat)
             weeks, days = divmod(delta_t.days, 7)

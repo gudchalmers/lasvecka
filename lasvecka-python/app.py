@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from waitress import serve
+from calc_date import compute_time
 import json
 
 # configuration
@@ -15,9 +16,9 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 # return contents of data.txt as a json object
 @app.route('/getData')
-def read_json():
-    with open('data.txt', 'r') as data_file:
-        return jsonify(eval(data_file.read()))
+def get_studyweek():
+    return jsonify(compute_time())
+
 
 # http://localhost:5000
 if __name__ == '__main__':
