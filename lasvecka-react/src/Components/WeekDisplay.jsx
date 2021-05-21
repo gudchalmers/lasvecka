@@ -35,7 +35,7 @@ class WeekDisplay extends Component {
     if (data !== 'undefined' && data.length > 0) {
       return data;
     } else {
-      return "Självstudier"
+      return ""
     }
     
   }
