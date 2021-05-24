@@ -37,7 +37,7 @@ def handle_easter(easter_start_diff, easter_end_diff):
 # Computes and determines the week of the study period, or returns Självstudier/Tentavecka if it's Easter or
 # exam period.
 def compute_time():
-    current_date = date.fromisoformat("2021-01-17")
+    current_date = date.today()
     # Calculates diffs for easter handling
     easter_end_check =  current_date - ORD_CONT
     easter_start_check = current_date - EASTER_START
