@@ -14,7 +14,7 @@ def read_date_period(curr_date):
         for dat, typ in date_dict.items():
             delta_t = date.fromisoformat(dat) - curr_date
             if delta_t.days == 0:
-                return (date.fromisoformat(dat), typ)
+                return (dat, typ)
             elif delta_t.days > diff and delta_t.days < 0:
                 sought_date = dat
                 diff = delta_t.days
@@ -37,7 +37,7 @@ def handle_easter(easter_start_diff, easter_end_diff):
 # Computes and determines the week of the study period, or returns Självstudier/Tentavecka if it's Easter or
 # exam period.
 def compute_time():
-    current_date = date.today()
+    current_date = date.fromisoformat("2021-04-28")
     # Calculates diffs for easter handling
     easter_end_check =  current_date - ORD_CONT
     easter_start_check = current_date - EASTER_START
@@ -45,6 +45,7 @@ def compute_time():
     print(dat, typ)
     # Is it exam period? Also check for final exam period
     if typ == "exam_period":
+        print(type(dat))
         delta_t = current_date - date.fromisoformat(dat)
         if delta_t.days > 7:
             return "Självstudier"
