@@ -61,6 +61,6 @@ def compute_time():
             # divmod will interpret the first study week as week 0
             return ("LV " + str(weeks + 1))
 
-# For testing purposes
+
 if __name__ == '__main__':
-    print(compute_time())
+    compute_time()
