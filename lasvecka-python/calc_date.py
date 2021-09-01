@@ -1,9 +1,8 @@
-from datetime import date, timedelta
-import json
+from datetime import date
 
-EASTER_START = date.fromisoformat("2021-04-01")
-EASTER_END = date.fromisoformat("2021-04-10")
-ORD_CONT = date.fromisoformat("2021-04-12")
+EASTER_START = date.fromisoformat("2022-04-11")
+EASTER_END = date.fromisoformat("2022-04-19")
+ORD_CONT = date.fromisoformat("2022-04-25")
 
 # Find the appropiate date & period from data.txt (the output from the webscraper)
 def read_date_period(curr_date):
@@ -37,15 +36,13 @@ def handle_easter(easter_start_diff, easter_end_diff):
 # Computes and determines the week of the study period, or returns Självstudier/Tentavecka if it's Easter or
 # exam period.
 def compute_time():
-    current_date = date.fromisoformat("2021-04-28")
+    current_date = date.today()
     # Calculates diffs for easter handling
     easter_end_check =  current_date - ORD_CONT
     easter_start_check = current_date - EASTER_START
     dat, typ = read_date_period(current_date)
-    print(dat, typ)
     # Is it exam period? Also check for final exam period
     if typ == "exam_period":
-        print(type(dat))
         delta_t = current_date - date.fromisoformat(dat)
         if delta_t.days > 7:
             return "Självstudier"
@@ -58,10 +55,11 @@ def compute_time():
         # Regular time handling
         delta_t = current_date - date.fromisoformat(dat)
         weeks, _ = divmod(delta_t.days, 7)
-        if weeks > 8:
+        if weeks > 7:
             return ("Självstudier")
         else:
-            return ("LV " + str(weeks))
+            # divmod will interpret the first study week as week 0
+            return ("LV " + str(weeks + 1))
 
 # For testing purposes
 if __name__ == '__main__':

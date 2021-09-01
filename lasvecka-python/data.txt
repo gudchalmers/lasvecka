@@ -1,1 +1,1 @@
-{"2020-08-31": "study_period", "2020-10-24": "exam_period", "2020-11-02": "study_period", "2021-01-09": "exam_period", "2021-01-18": "study_period", "2021-03-13": "exam_period", "2021-03-22": "study_period", "2021-05-29": "exam_period"}
+{"2021-08-30": "study_period", "2021-10-23": "exam_period", "2021-11-01": "study_period", "2022-01-08": "exam_period", "2022-01-17": "study_period", "2022-03-12": "exam_period", "2022-03-21": "study_period", "2022-05-28": "exam_period"}
