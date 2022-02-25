@@ -1,0 +1,17 @@
+.WeekDisplayText {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 260px;
+    font-weight: bold;
+    font-family: Arial, serif;
+    line-height: 227px;
+    margin-top: -110px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 260px;
+    color: #1c7bb7;
+}

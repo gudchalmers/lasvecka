@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import '../Style/WeekDisplay.css';
 
 class WeekDisplay extends Component {
   constructor(props) {
