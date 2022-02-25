@@ -10,6 +10,7 @@ WORKDIR /usr/src/lasveckor/frontend
 COPY . .
 COPY ["package.json", "./"]
 
+RUN yarn upgrade
 RUN yarn install
 RUN yarn global add react-scripts
 RUN yarn build
