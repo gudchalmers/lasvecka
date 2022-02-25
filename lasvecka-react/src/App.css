@@ -1,11 +1,4 @@
 .App {
   background-color: #90c0de;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  font-size: 14em;
-  color: #066eb0;
+  overflow: hidden;
 }
