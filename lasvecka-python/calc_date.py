@@ -29,7 +29,7 @@ def handle_easter(easter_start_diff, easter_end_diff):
     # Add offset, will go up to Lv 8 until regular exam period
     elif easter_end_diff.days > 0:
         weeks, _ = divmod(easter_end_diff.days, 7)
-        return ("Lv " + str(weeks + 2))
+        return ("Lv " + str(weeks + 4))
     
 
 
