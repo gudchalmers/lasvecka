@@ -1,10 +1,11 @@
-FROM node:latest
+FROM node:17
 
 WORKDIR /app
 
 COPY . .
 
-RUN yarn
+RUN yarn install
+RUN yarn upgrade --latest
 
 CMD yarn start
 
