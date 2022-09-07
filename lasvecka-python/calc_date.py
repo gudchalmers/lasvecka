@@ -1,8 +1,8 @@
 from datetime import date
 
-EASTER_START = date.fromisoformat("2022-04-11")
-EASTER_END = date.fromisoformat("2022-04-19")
-ORD_CONT = date.fromisoformat("2022-04-25")
+EASTER_START = date.fromisoformat("2023-04-03")
+EASTER_END = date.fromisoformat("2023-04-11")
+ORD_CONT = date.fromisoformat("2023-04-11")
 
 # Find the appropiate date & period from data.txt (the output from the webscraper)
 def read_date_period(curr_date):
