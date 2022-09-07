@@ -1,4 +1,4 @@
-FROM node:17 AS build-step
+FROM node:18 AS build-step
 
 RUN mkdir -p /usr/src/lasveckor/frontend
 RUN chown -R node:node /usr/src/lasveckor/frontend
