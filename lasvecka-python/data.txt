@@ -1,1 +1,0 @@
-{"2023-08-28": "study_period", "2023-10-21": "exam_period", "2023-10-30": "study_period", "2024-01-08": "exam_period", "2024-01-15": "study_period", "2024-03-09": "exam_period", "2024-03-18": "study_period", "2024-05-25": "exam_period"}
