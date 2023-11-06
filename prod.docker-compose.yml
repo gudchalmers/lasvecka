@@ -1,31 +1,14 @@
-version: '2'
+version: '3'
 
 services:
-  backend:
-    container_name: lasvecka-python
-    image: gudchs/lasvecka_backend:latest
-    network_mode: "nginxreverseproxy_default"
-    volumes:
-      - LasveckaBackend:/lasvecka-python
-    environment:
-      VIRTUAL_HOST: api.lasvecka.nu
-      VIRTUAL_PORT: 5000
-      LETSENCRYPT_HOST: api.lasvecka.nu
+  app:
+    container_name: lasvecka-node
+    iamge: ghcr.io/gudchs/lasvecka:main
     restart: unless-stopped
-
-  frontend:
-    container_name: lasvecka-react
-    image: gudchs/lasvecka_frontend:latest
-    stdin_open: true
-    network_mode: "nginxreverseproxy_default"
+    ports:
+      - 3000:3000
     volumes:
-      - LasveckaFrontend:/usr/src/lasveckor/frontend
-    environment:
-      VIRTUAL_HOST: lasvecka.nu,www.lasvecka.nu,xn--lsvecka-5wa.nu,www.xn--lsvecka-5wa.nu
-
-      LETSENCRYPT_HOST: lasvecka.nu,www.lasvecka.nu,xn--lsvecka-5wa.nu,www.xn--lsvecka-5wa.nu
-    restart: unless-stopped
+      - lasvecka:/usr/src/app/data
 
 volumes:
-  LasveckaFrontend:
-  LasveckaBackend:
+  lasvecka:
