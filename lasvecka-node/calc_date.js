@@ -1,15 +1,9 @@
-const fs = require('fs');
 const moment = require('moment');
 const dateDict = require('./data.json');
-
-const EASTER_START = moment("2024-04-03");
-const EASTER_END = moment("2024-04-05");
-const ORD_CONT = moment("2024-04-08");
 
 function readDatePeriod(currDate) {
   let soughtDate = "";
   let diff = -1000;
-  let dateDict = JSON.parse(fs.readFileSync('data.json', 'utf8'));
   for (let dat in dateDict) {
     let deltaT = moment(dat).diff(currDate, 'days');
     if (deltaT === 0) {
@@ -32,6 +26,17 @@ function handleEaster(easterStartDiff, easterEndDiff) {
 }
 
 function computeTime() {
+  // Find date where value is easter_start, easter_end and ord_cont in json file
+  let EASTER_START;
+  let ORD_CONT;
+  for (let dat in dateDict) {
+    if (dateDict[dat] === "easter_start") {
+      EASTER_START = moment(dat);
+    } else if (dateDict[dat] === "ord_cont") {
+      ORD_CONT = moment(dat);
+    }
+  }
+
   let currentDate = moment();
   let easterEndCheck = currentDate.diff(ORD_CONT, 'days');
   let easterStartCheck = currentDate.diff(EASTER_START, 'days');
@@ -57,4 +62,4 @@ function computeTime() {
   }
 }
 
-console.log(computeTime());
+module.exports = computeTime;
