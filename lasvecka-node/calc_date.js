@@ -1,10 +1,34 @@
 const moment = require('moment');
-const dateDict = require('./data.json');
+const fs = require('fs');
+const scrape = require('./lasveckor_scraper.js');
+var dateDict = {};
+
+// check if data.json exists
+if (!fs.existsSync('data.json')) {
+  scrape().then((res) => {
+    dateDict = res
+  });
+} else {
+  dateDict = JSON.parse(fs.readFileSync('data.json'));
+
+  //check if it was updated after 1/7 this year and if 1/7 has occured this year
+  let updated = moment(dateDict["updated"]);
+  let firstOfJuly = moment().month(6).date(1);
+  if (updated.isBefore(firstOfJuly) && moment().isAfter(firstOfJuly)) {
+    scrape().then((res) => {
+      dateDict = res
+    });
+  }
+}
 
 function readDatePeriod(currDate) {
   let soughtDate = "";
   let diff = -1000;
   for (let dat in dateDict) {
+    // if dat is updated, easter_start, easter_end or ord_cont then skip
+    if (dat === "updated" || dat === "easter_start" || dat === "easter_end" || dat === "ord_cont") {
+      continue;
+    }
     let deltaT = moment(dat).diff(currDate, 'days');
     if (deltaT === 0) {
       return { date: dat, type: dateDict[dat] };
@@ -27,16 +51,8 @@ function handleEaster(easterStartDiff, easterEndDiff) {
 
 function computeTime() {
   // Find date where value is easter_start, easter_end and ord_cont in json file
-  let EASTER_START;
-  let ORD_CONT;
-  for (let dat in dateDict) {
-    if (dateDict[dat] === "easter_start") {
-      EASTER_START = moment(dat);
-    } else if (dateDict[dat] === "ord_cont") {
-      ORD_CONT = moment(dat);
-    }
-  }
-
+  let EASTER_START = dateDict["easter_start"]
+  let ORD_CONT = dateDict["ord_cont"]
   let currentDate = moment();
   let easterEndCheck = currentDate.diff(ORD_CONT, 'days');
   let easterStartCheck = currentDate.diff(EASTER_START, 'days');
