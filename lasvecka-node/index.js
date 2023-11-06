@@ -49,7 +49,7 @@ const render = (data) => {
         height: 220px;
         text-align: center;
         color: #1c7bb7;
-        font-family: Arial, serif;
+        font-family: Arial, sans-serif;
         font-size: 260px;
         line-height: 227px;
         font-weight: bold;
