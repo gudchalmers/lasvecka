@@ -60,8 +60,8 @@ const render = (data) => {
     <time datetime="${data.week}">${data.studyweek}</time>
     <script>
       (function () {
-        console.log('Powered by G.U.D.')
-        console.log('Source code: https://github.com/gudchalmers/lasvecka')
+        console.log('Powered by G.U.D.');
+        console.log('Source code: https://github.com/gudchalmers/lasvecka');
         document.head = document.head || document.getElementsByTagName('head')[0];
         var canvas = document.createElement('canvas'),
           img = document.createElement('img'),
