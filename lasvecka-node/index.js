@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   res.send(render(data));
 });
 
-app.get('/api', (req, res) => {
+app.get('/data', (req, res) => {
   res.send(computeTime());
 });
 
