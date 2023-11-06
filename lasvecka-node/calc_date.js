@@ -4,12 +4,12 @@ const scrape = require('./lasveckor_scraper.js');
 var dateDict = {};
 
 // check if data.json exists
-if (!fs.existsSync('data.json')) {
+if (!fs.existsSync('./data/data.json')) {
   scrape().then((res) => {
     dateDict = res
   });
 } else {
-  dateDict = JSON.parse(fs.readFileSync('data.json'));
+  dateDict = JSON.parse(fs.readFileSync('./data/data.json'));
 
   //check if it was updated after 1/7 this year and if 1/7 has occured this year
   let updated = moment(dateDict["updated"]);

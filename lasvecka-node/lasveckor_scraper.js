@@ -44,7 +44,7 @@ async function scrape() {
   }
 
   result["updated"] = new Date().toISOString().slice(0, 10)
-  await fs.promises.writeFile('data.json', JSON.stringify(result))
+  await fs.promises.writeFile('./data/data.json', JSON.stringify(result))
   return result
 }
 
