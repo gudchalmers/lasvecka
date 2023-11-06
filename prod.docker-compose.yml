@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     container_name: lasvecka-node
-    iamge: ghcr.io/gudchs/lasvecka:main
+    image: ghcr.io/gudchalmers/lasvecka:main
     restart: unless-stopped
     ports:
       - 3000:3000
