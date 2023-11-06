@@ -7,3 +7,6 @@ The application is a scraper and a frontend. The scraper scrapes
 
 ## Running the app locally
 Use command `docker-compose -f dev.docker-compose.yaml up` to run the dev docker-compose.yml.
+
+## API
+Visit https://lasvecka.nu/data for raw data.
