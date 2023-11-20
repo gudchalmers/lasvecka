@@ -19,6 +19,30 @@ app.get('/data', (req, res) => {
   res.send(computeTime());
 });
 
+app.get('/favicon.ico', (req, res) => {
+  let studyweek = computeTime();
+  let studyweekNum = studyweek.replace('LV ', '').replace('Självstudier', 'S').replace('Tentavecka', 'T');
+  res.sendFile(`${__dirname}/public/icons/${studyweekNum}/favicon.ico`);
+});
+
+app.get('/site.webmanifest', (req, res) => {
+  let studyweek = computeTime();
+  let studyweekNum = studyweek.replace('LV ', '').replace('Självstudier', 'S').replace('Tentavecka', 'T');
+  let manifest = {
+    "name": "läsvecka.nu",
+    "short_name": "läsvecka.nu",
+    "icons": [
+      { "src": `/icons/${studyweekNum}/android-chrome-192x192.png`, "sizes": "192x192", "type": "image/png" },
+      { "src": `/icons/${studyweekNum}/android-chrome-512x512.png`, "sizes": "512x512", "type": "image/png" }
+    ],
+    "theme_color": "#1c7bb7", 
+    "background_color": "#90c0de",
+    "display": "standalone"
+  };
+
+  res.send(manifest);
+});
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
@@ -30,9 +54,9 @@ const render = (data) => {
   <head>
     <meta charset="UTF-8">
     <title>läsvecka.nu | ${data.studyweek}</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" id="favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/${data.studyweekNum}/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/${data.studyweekNum}/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/${data.studyweekNum}/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="description" content="läsvecka.nu ger dig aktuell läsvecka, utan några konstigheter!">
     <meta property="og:type" content="website">
@@ -59,32 +83,8 @@ const render = (data) => {
   <body>
     <time datetime="${data.week}">${data.studyweek}</time>
     <script>
-      (function () {
-        console.log('Powered by G.U.D. https://gud.chs.chalmers.se/');
-        console.log('Source code: https://github.com/gudchalmers/lasvecka');
-        document.head = document.head || document.getElementsByTagName('head')[0];
-        var canvas = document.createElement('canvas'),
-          img = document.createElement('img'),
-          oldLink = document.getElementById('favicon'),
-          link = oldLink.cloneNode(true),
-          week = '${data.studyweekNum}';
-        if (canvas.getContext) {
-          canvas.height = canvas.width = 16;
-          var ctx = canvas.getContext('2d'),
-            textWidth = ctx.measureText(week).width;
-          img.onload = function () {
-            ctx.drawImage(this, 0, 0);
-            ctx.font = 'bold 10px "helvetica", sans-serif';
-            ctx.fillStyle = '#066EB0';
-            ctx.fillText(week, (canvas.width / 2) - (textWidth / 2), 12);
-            link.href = canvas.toDataURL('image/png');
-            document.head.removeChild(oldLink);
-            document.head.appendChild(link);
-          };
-          img.src = 'faviconbkg.png';
-        }
-      })();
-
+      console.log('Powered by G.U.D. https://gud.chs.chalmers.se/');
+      console.log('Source code: https://github.com/gudchalmers/lasvecka');
       setTimeout(function () { location.reload(); }, 25886000);
     </script>
   </body>
