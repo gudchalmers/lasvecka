@@ -4,13 +4,20 @@ const app = express();
 const computeTime = require('./calc_date.js');
 const port = process.env.PORT || 3000;
 
+let studyweek = '';
+let studyweekNum = '';
+
+function updateStudyWeek() {
+  studyweek = computeTime();
+  studyweekNum = studyweek.replace('LV ', '').replace('Självstudier', 'S').replace('Tentavecka', 'T');
+  return { studyweek, studyweekNum };
+}
+
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  let studyweek = computeTime();
-  let studyweekNum = studyweek.replace('LV ', '').replace('Självstudier', 'S').replace('Tentavecka', 'T');
-  // eg. 2023-W45
-  let week = moment().format('YYYY-[W]WW');
+  let { studyweek, studyweekNum } = updateStudyWeek();
+  let week = moment().format('YYYY-[W]WW'); // eg. 2023-W45
   let data = { studyweek, week, studyweekNum };
   res.send(render(data));
 });
