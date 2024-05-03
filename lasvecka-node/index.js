@@ -1,61 +1,78 @@
-const express = require('express');
-const moment = require('moment');
+const express = require("express");
+const moment = require("moment");
 const app = express();
-const computeTime = require('./calc_date.js');
+const computeTime = require("./calc_date.js");
 const port = process.env.PORT || 3000;
 
-let studyweek = '';
-let studyweekNum = '';
+let studyweek = "";
+let studyweekNum = "";
 
 function updateStudyWeek() {
-  studyweek = computeTime();
-  studyweekNum = studyweek.replace('LV ', '').replace('Självstudier', 'S').replace('Tentavecka', 'T');
-  return { studyweek, studyweekNum };
+	studyweek = computeTime();
+	studyweekNum = studyweek
+		.replace("LV ", "")
+		.replace("Självstudier", "S")
+		.replace("Tentavecka", "T");
+	return { studyweek, studyweekNum };
 }
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-  let { studyweek, studyweekNum } = updateStudyWeek();
-  let week = moment().format('YYYY-[W]WW'); // eg. 2023-W45
-  let data = { studyweek, week, studyweekNum };
-  res.send(render(data));
+app.get("/", (req, res) => {
+	const { studyweek, studyweekNum } = updateStudyWeek();
+	const week = moment().format("YYYY-[W]WW"); // eg. 2023-W45
+	const data = { studyweek, week, studyweekNum };
+	res.send(render(data));
 });
 
-app.get('/data', (req, res) => {
-  res.send(computeTime());
+app.get("/data", (req, res) => {
+	res.send(computeTime());
 });
 
-app.get('/favicon.ico', (req, res) => {
-  let studyweek = computeTime();
-  let studyweekNum = studyweek.replace('LV ', '').replace('Självstudier', 'S').replace('Tentavecka', 'T');
-  res.sendFile(`${__dirname}/public/icons/${studyweekNum}/favicon.ico`);
+app.get("/favicon.ico", (req, res) => {
+	const studyweek = computeTime();
+	const studyweekNum = studyweek
+		.replace("LV ", "")
+		.replace("Självstudier", "S")
+		.replace("Tentavecka", "T");
+	res.sendFile(`${__dirname}/public/icons/${studyweekNum}/favicon.ico`);
 });
 
-app.get('/site.webmanifest', (req, res) => {
-  let studyweek = computeTime();
-  let studyweekNum = studyweek.replace('LV ', '').replace('Självstudier', 'S').replace('Tentavecka', 'T');
-  let manifest = {
-    "name": "läsvecka.nu",
-    "short_name": "läsvecka.nu",
-    "icons": [
-      { "src": `/icons/${studyweekNum}/android-chrome-192x192.png`, "sizes": "192x192", "type": "image/png" },
-      { "src": `/icons/${studyweekNum}/android-chrome-512x512.png`, "sizes": "512x512", "type": "image/png" }
-    ],
-    "theme_color": "#1c7bb7", 
-    "background_color": "#90c0de",
-    "display": "standalone"
-  };
+app.get("/site.webmanifest", (req, res) => {
+	const studyweek = computeTime();
+	const studyweekNum = studyweek
+		.replace("LV ", "")
+		.replace("Självstudier", "S")
+		.replace("Tentavecka", "T");
+	const manifest = {
+		name: "läsvecka.nu",
+		short_name: "läsvecka.nu",
+		icons: [
+			{
+				src: `/icons/${studyweekNum}/android-chrome-192x192.png`,
+				sizes: "192x192",
+				type: "image/png",
+			},
+			{
+				src: `/icons/${studyweekNum}/android-chrome-512x512.png`,
+				sizes: "512x512",
+				type: "image/png",
+			},
+		],
+		theme_color: "#1c7bb7",
+		background_color: "#90c0de",
+		display: "standalone",
+	};
 
-  res.send(manifest);
+	res.send(manifest);
 });
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`)
-})
+	console.log(`App listening at http://localhost:${port}`);
+});
 
 const render = (data) => {
-  const html = `
+	const html = `
 <!DOCTYPE html>
 <html>
   <head>
@@ -96,5 +113,9 @@ const render = (data) => {
     </script>
   </body>
 </html>`;
-  return html.replace(/\n/g, '').replace(/\r/g, '').replace(/\t/g, '').replace(/ {2,}/g, '');
-}
+	return html
+		.replace(/\n/g, "")
+		.replace(/\r/g, "")
+		.replace(/\t/g, "")
+		.replace(/ {2,}/g, "");
+};
