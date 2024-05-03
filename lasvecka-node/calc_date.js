@@ -48,16 +48,6 @@ function readDatePeriod(currDate) {
 	return { date: soughtDate, type: dateDict[soughtDate] };
 }
 
-function handleEaster(easterStartCheck, easterEndCheck) {
-	if (easterStartCheck >= 0 && easterEndCheck <= 0) {
-		return "Självstudier";
-	}
-	if (easterEndCheck > 0) {
-		const weeks = Math.floor(easterEndCheck / 7);
-		return `Lv ${weeks + 3}`;
-	}
-}
-
 function computeTime() {
 	// Find date where value is easter_start, easter_end and ord_cont in json file
 	const EASTER_START = dateDict.easter_start;
@@ -73,11 +63,20 @@ function computeTime() {
 		}
 		return "Tentavecka";
 	}
-	if (easterEndCheck >= 0 || easterStartCheck >= 0) {
-		return handleEaster(easterStartCheck, easterEndCheck);
+
+	let deltaT = currentDate.diff(moment(dat), "days");
+
+	if (easterStartCheck >= 0 && easterEndCheck <= 0) {
+		return "Självstudier";
 	}
-	const deltaT = currentDate.diff(moment(dat), "days");
+
+	if (easterEndCheck > 0) {
+		// the easter period is over and it is 7 days long
+		deltaT = deltaT - 7;
+	}
+
 	const weeks = Math.floor(deltaT / 7);
+
 	if (weeks > 7) {
 		return "Självstudier";
 	}
