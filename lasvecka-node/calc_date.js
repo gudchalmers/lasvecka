@@ -34,6 +34,7 @@ function readDatePeriod(currDate) {
 		) {
 			continue;
 		}
+
 		const deltaT = moment(dat).diff(currDate, "days");
 		if (deltaT === 0) {
 			return { date: dat, type: dateDict[dat] };
@@ -47,13 +48,13 @@ function readDatePeriod(currDate) {
 	return { date: soughtDate, type: dateDict[soughtDate] };
 }
 
-function handleEaster(easterStartDiff, easterEndDiff) {
-	if (easterStartDiff >= 0 && easterEndDiff <= 0) {
+function handleEaster(easterStartCheck, easterEndCheck) {
+	if (easterStartCheck >= 0 && easterEndCheck <= 0) {
 		return "Självstudier";
 	}
-	if (easterEndDiff > 0) {
-		const weeks = Math.floor(easterEndDiff / 7);
-		return `Lv ${weeks + 4}`;
+	if (easterEndCheck > 0) {
+		const weeks = Math.floor(easterEndCheck / 7);
+		return `Lv ${weeks + 3}`;
 	}
 }
 
