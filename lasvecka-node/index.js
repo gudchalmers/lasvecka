@@ -37,7 +37,6 @@ app.get("/favicon.ico", (req, res) => {
 		.replace("MV ", "")
 		.replace("Självstudier", "S")
 		.replace("Tentavecka", "T");
-  console.log(studyweekNum);
 	res.sendFile(`${__dirname}/public/icons/${studyweekNum}/favicon.ico`);
 });
 
