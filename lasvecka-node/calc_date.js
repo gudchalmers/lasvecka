@@ -11,7 +11,7 @@ if (!fs.existsSync("./data/data.json")) {
 } else {
 	dateDict = JSON.parse(fs.readFileSync("./data/data.json"));
 
-	//check if it was updated after 1/7 this year and if 1/7 has occured this year
+	// check if it was updated after 1/7 this year and if 1/7 has occured this year
 	const updated = moment(dateDict.updated);
 	const firstOfJuly = moment().month(6).date(1);
 	if (updated.isBefore(firstOfJuly) && moment().isAfter(firstOfJuly)) {
