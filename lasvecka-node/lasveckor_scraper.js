@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const axios = require("axios");
+const moment = require("moment");
 
 async function scrape() {
 	console.log("Scraping data from student.chalmers.se");
@@ -27,6 +28,10 @@ async function scrape() {
 		if (line.startsWith("Läsperiod")) {
 			const date = line.match(/(\d{4}-\d{2}-\d{2})/)[0];
 			result[date] = "study_period";
+			if (line.startsWith("Läsperiod 1")) {
+				const firstDayDate = moment(date).subtract(13, "days").format('YYYY-MM-DD');
+				result[firstDayDate] = "first_day";
+			}
 		} else if (line.startsWith("Tentamensperiod")) {
 			const date = line.match(/(\d{4}-\d{2}-\d{2})/)[0];
 			result[date] = "exam_period";

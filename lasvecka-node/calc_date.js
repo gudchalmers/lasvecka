@@ -65,6 +65,10 @@ function computeTime() {
 	}
 
 	let deltaT = currentDate.diff(moment(dat), "days");
+	if (typ === 'first_day') {
+		const weeks = Math.floor(deltaT / 7);
+		return `MV ${weeks + 1}`;
+	}
 
 	if (easterStartCheck >= 0 && easterEndCheck <= 0) {
 		return "Självstudier";

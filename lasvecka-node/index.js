@@ -11,6 +11,7 @@ function updateStudyWeek() {
 	studyweek = computeTime();
 	studyweekNum = studyweek
 		.replace("LV ", "")
+    .replace("MV ", "")
 		.replace("Självstudier", "S")
 		.replace("Tentavecka", "T");
 	return { studyweek, studyweekNum };
@@ -33,8 +34,10 @@ app.get("/favicon.ico", (req, res) => {
 	const studyweek = computeTime();
 	const studyweekNum = studyweek
 		.replace("LV ", "")
+		.replace("MV ", "")
 		.replace("Självstudier", "S")
 		.replace("Tentavecka", "T");
+  console.log(studyweekNum);
 	res.sendFile(`${__dirname}/public/icons/${studyweekNum}/favicon.ico`);
 });
 
@@ -42,6 +45,7 @@ app.get("/site.webmanifest", (req, res) => {
 	const studyweek = computeTime();
 	const studyweekNum = studyweek
 		.replace("LV ", "")
+    .replace("MV ", "")
 		.replace("Självstudier", "S")
 		.replace("Tentavecka", "T");
 	const manifest = {
