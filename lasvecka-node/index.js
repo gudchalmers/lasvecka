@@ -80,7 +80,7 @@ const render = (data) => {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>läsvecka.nu | ${data.studyweek}</title>
+    <title>${data.studyweek} | läsvecka.nu</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/${data.studyweekNum}/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/${data.studyweekNum}/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/${data.studyweekNum}/favicon-16x16.png">
