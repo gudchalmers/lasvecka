@@ -1,10 +1,7 @@
-version: "3"
-
 services:
   app:
     container_name: lasvecka-node
     build:
-      context: ./lasvecka-node
       dockerfile: Dockerfile
     ports:
       - 3000:3000
