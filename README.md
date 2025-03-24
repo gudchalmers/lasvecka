@@ -11,6 +11,12 @@ The application is a scraper and a frontend. The scraper scrapes
 
 Use command `docker-compose -f dev.docker-compose.yaml up` to run the dev docker-compose.yml.
 
+or use `node index.js` to run the app locally without docker.
+
 ## API
 
 Visit https://lasvecka.nu/data for raw data.
+
+## Are the weeks not updating correctly?
+
+It should update automatically, but it can of course break since it's web scraped from Chalmers' website. Check out `lasveckor_scraper.js` for the scraping logic.
