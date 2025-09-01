@@ -11,7 +11,7 @@ The application is a scraper and a frontend. The scraper scrapes
 
 Use command `docker-compose -f dev.docker-compose.yaml up` to run the dev docker-compose.yml.
 
-or use `node index.js` to run the app locally without docker.
+or use `node index.js` to run the app locally without docker. Don't forget to run `npm install` first.
 
 ## API
 
