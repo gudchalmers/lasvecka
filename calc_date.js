@@ -48,11 +48,10 @@ function readDatePeriod(currDate) {
 	return { date: soughtDate, type: dateDict[soughtDate] };
 }
 
-function computeTime() {
+function computeTime(currentDate = moment()) {
 	// Find date where value is easter_start, easter_end and ord_cont in json file
 	const EASTER_START = dateDict.easter_start;
 	const ORD_CONT = dateDict.ord_cont;
-	const currentDate = moment();
 	const easterEndCheck = currentDate.diff(ORD_CONT, "days");
 	const easterStartCheck = currentDate.diff(EASTER_START, "days");
 	const { date: dat, type: typ } = readDatePeriod(currentDate);
